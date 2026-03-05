@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wilshem Pennick</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f1eb;color:#0e1117;line-height:1.6;font-size:15px}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{background:#1a2540;display:flex;justify-content:space-between;align-items:center;padding:12px 36px;position:sticky;top:0;z-index:999;box-shadow:0 2px 14px rgba(0,0,0,0.35)}
+.nav-name{color:#fff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;gap:18px}
+.nav-links a{color:rgba(255,255,255,.55);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:#c8923a}
+.nav-btn{background:#c8923a;color:#fff;border:none;padding:7px 18px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .2s;font-family:inherit}
+.nav-btn:hover{background:#9e6e26}
+
+/* HERO */
+.hero{background:#1a2540;color:#fff;padding:64px 40px 54px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-80px;right:-80px;width:480px;height:480px;background:radial-gradient(circle,rgba(200,146,58,.13) 0%,transparent 68%);pointer-events:none}
+.hero-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#c8923a 0%,rgba(200,146,58,.15) 70%,transparent 100%)}
+.hero-inner{max-width:860px;margin:0 auto;position:relative}
+.hero-name{font-family:'Playfair Display',Georgia,serif;font-size:56px;font-weight:700;line-height:1.05;margin-bottom:10px}
+.hero-name span{color:#c8923a}
+.hero-tag{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px}
+.hero-summary{font-size:15.5px;line-height:1.82;color:rgba(255,255,255,.78);max-width:700px;margin-bottom:22px;font-weight:300}
+.hero-currently{margin-bottom:28px}
+.hero-currently-label{font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#c8923a;margin-bottom:10px}
+.current-roles{display:flex;flex-wrap:wrap;gap:8px}
+.role-pill{background:rgba(255,255,255,.07);border:1px solid rgba(200,146,58,.35);padding:5px 13px;border-radius:2px;font-size:11.5px;color:rgba(255,255,255,.75);font-weight:400}
+.hero-pills{display:flex;gap:20px;flex-wrap:wrap}
+.pill{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.45)}
+.pill-dot{width:5px;height:5px;background:#c8923a;border-radius:50%;flex-shrink:0}
+
+/* LAYOUT */
+.wrap{max-width:860px;margin:0 auto;padding:44px 36px 80px}
+section{margin-bottom:54px}
+.sec-label{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#c8923a;margin-bottom:6px}
+.sec-title{font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:600;color:#1a2540;margin-bottom:24px;padding-bottom:11px;border-bottom:1px solid #ddd8cf}
+
+/* EXPORT BOX */
+.export-box{background:#fdf6ec;border:1px solid #ddd8cf;border-left:3px solid #c8923a;padding:16px 20px;border-radius:2px;margin-bottom:38px;font-size:12px;color:#6b6560;line-height:1.7}
+.export-box b{color:#1a2540;display:block;margin-bottom:5px}
+
+/* EXPERTISE CARDS */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:11px}
+.exp-card{background:#fff;border:1px solid #ddd8cf;border-left:3px solid #c8923a;padding:14px 16px;cursor:pointer;border-radius:2px;transition:box-shadow .2s,transform .2s;user-select:none}
+.exp-card:hover{box-shadow:0 4px 16px rgba(200,146,58,.13);transform:translateY(-1px)}
+.exp-top{display:flex;justify-content:space-between;align-items:center}
+.exp-title{font-weight:600;font-size:13px;color:#1a2540}
+.exp-plus{font-size:22px;color:#c8923a;line-height:1;font-weight:300;transition:transform .25s;flex-shrink:0;margin-left:8px}
+.exp-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #ddd8cf;font-size:12.5px;color:#6b6560;line-height:1.65}
+.exp-card.open{background:#fdf6ec}
+.exp-card.open .exp-plus{transform:rotate(45deg)}
+.exp-card.open .exp-detail{display:block}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:8px}
+.tl-wrap{position:relative;padding-left:24px}
+.tl-wrap::before{content:'';position:absolute;left:4px;top:24px;width:1px;height:calc(100% + 8px);background:#ddd8cf}
+.tl-wrap:last-child::before{display:none}
+.tl-dot{position:absolute;left:0;top:19px;width:10px;height:10px;border-radius:50%;background:#c8923a;border:2px solid #f4f1eb;z-index:1}
+.tl-head{background:#fff;border:1px solid #ddd8cf;padding:15px 19px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;border-radius:2px;transition:background .2s;user-select:none}
+.tl-head:hover,.tl-wrap.open .tl-head{background:#fdf6ec}
+.tl-wrap.open .tl-head{border-bottom:none;border-radius:2px 2px 0 0}
+.tl-title{font-weight:600;font-size:14px;color:#1a2540;margin-bottom:3px}
+.tl-org{font-size:12.5px;color:#c8923a;font-weight:500}
+.tl-right{text-align:right;flex-shrink:0;margin-left:14px}
+.tl-dates{font-size:11px;color:#6b6560;font-family:'Courier New',monospace;margin-bottom:3px}
+.tl-loc{font-size:11px;color:#6b6560}
+.tl-arr{font-size:11px;color:#c8923a;display:block;margin-top:5px;transition:transform .2s}
+.tl-wrap.open .tl-arr{transform:rotate(180deg)}
+.tl-body{display:none;background:#fdf6ec;border:1px solid #ddd8cf;border-top:none;padding:15px 19px 19px;border-radius:0 0 2px 2px}
+.tl-wrap.open .tl-body{display:block}
+.tl-body ul{list-style:none;padding:0}
+.tl-body ul li{position:relative;padding-left:16px;margin-bottom:8px;font-size:13px;line-height:1.65;color:#3a3530}
+.tl-body ul li::before{content:'--';position:absolute;left:0;color:#c8923a;font-weight:600}
+.tl-sublabel{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6b6560;margin:13px 0 7px}
+.tl-intro{font-size:12.5px;color:#6b6560;margin-bottom:9px;font-style:italic}
+
+/* STAT CARDS (Accomplishments) */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.stat-card{background:#fff;border:1px solid #ddd8cf;border-radius:2px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.stat-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.07);transform:translateY(-2px)}
+.stat-stripe{height:4px;background:linear-gradient(90deg,#c8923a,#1a2540)}
+.stat-body{padding:20px 18px 18px}
+.stat-number{font-family:'Playfair Display',Georgia,serif;font-size:34px;font-weight:700;color:#1a2540;line-height:1;margin-bottom:6px}
+.stat-number span{color:#c8923a;font-size:22px}
+.stat-label{font-size:12px;font-weight:600;color:#3a3530;margin-bottom:5px;line-height:1.35}
+.stat-context{font-size:11px;color:#6b6560;line-height:1.5}
+
+/* RESEARCH */
+.research-list{display:flex;flex-direction:column;gap:9px}
+.res-item{background:#fff;border:1px solid #ddd8cf;border-radius:2px;overflow:hidden}
+.res-head{padding:15px 19px;display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;transition:background .2s;user-select:none}
+.res-head:hover,.res-item.open .res-head{background:#fdf6ec}
+.res-title{font-weight:600;font-size:13.5px;color:#1a2540;margin-bottom:4px}
+.res-meta{font-size:11.5px;color:#6b6560;margin-bottom:6px}
+.res-tags{display:flex;gap:5px;flex-wrap:wrap}
+.res-arr{font-size:20px;color:#c8923a;transition:transform .2s;flex-shrink:0;margin-left:12px;margin-top:2px}
+.res-item.open .res-arr{transform:rotate(90deg)}
+.res-body{display:none;padding:13px 19px 17px;background:#fdf6ec;border-top:1px solid #ddd8cf;font-size:13px;line-height:1.7;color:#3a3530}
+.res-item.open .res-body{display:block}
+.res-finding{margin-top:10px;padding:10px 13px;background:#fff;border-left:3px solid #c8923a;font-size:12px;color:#3a3530;line-height:1.6}
+.res-finding-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#c8923a;margin-bottom:4px}
+
+/* PROJECTS */
+.proj-list{display:flex;flex-direction:column;gap:9px}
+.proj-item{background:#fff;border:1px solid #ddd8cf;border-radius:2px;overflow:hidden}
+.proj-head{padding:14px 19px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s;user-select:none}
+.proj-head:hover,.proj-item.open .proj-head{background:#fdf6ec}
+.proj-title{font-weight:600;font-size:13.5px;color:#1a2540;margin-bottom:3px}
+.proj-sub{font-size:11.5px;color:#6b6560;margin-bottom:6px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{background:#eee9e0;color:#6b6560;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:2px}
+.proj-arr{font-size:20px;color:#c8923a;transition:transform .2s;flex-shrink:0;margin-left:12px}
+.proj-item.open .proj-arr{transform:rotate(90deg)}
+.proj-body{display:none;padding:13px 19px 17px;background:#fdf6ec;border-top:1px solid #ddd8cf;font-size:13px;line-height:1.7;color:#3a3530}
+.proj-item.open .proj-body{display:block}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:16px}
+.edu-card{background:#fff;border:1px solid #ddd8cf;padding:17px 19px;border-radius:2px}
+.edu-deg{font-weight:600;font-size:13.5px;color:#1a2540;margin-bottom:4px}
+.edu-school{font-size:12px;color:#c8923a;margin-bottom:4px}
+.edu-yr{font-size:11px;color:#6b6560;font-family:'Courier New',monospace}
+.cert-list{display:flex;flex-direction:column;gap:6px}
+.cert-row{display:flex;align-items:center;gap:11px;padding:9px 13px;background:#fff;border:1px solid #ddd8cf;border-radius:2px;font-size:12.5px}
+.cert-dot{width:6px;height:6px;background:#c8923a;border-radius:50%;flex-shrink:0}
+.cert-name{font-weight:500;color:#1a2540;flex:1}
+.cert-iss{font-size:10.5px;color:#6b6560;text-align:right}
+.lang-row{margin-top:16px;padding:13px 17px;background:#fff;border:1px solid #ddd8cf;border-radius:2px}
+.lang-lbl{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6b6560;margin-bottom:9px}
+.langs{display:flex;gap:26px;flex-wrap:wrap;font-size:13px}
+.langs strong{color:#1a2540}
+
+/* ADVISORY */
+.adv-list{display:flex;flex-direction:column;gap:8px}
+.adv-row{display:flex;align-items:center;gap:15px;padding:13px 17px;background:#fff;border:1px solid #ddd8cf;border-left:3px solid #1a2540;border-radius:2px;font-size:13px}
+.adv-role{font-weight:600;color:#1a2540;min-width:160px}
+.adv-org{color:#6b6560}
+
+/* PHILOSOPHY */
+.phil{background:#1a2540;color:#fff;padding:38px 42px;border-radius:2px;position:relative;overflow:hidden}
+.phil-mark{position:absolute;top:-20px;left:22px;font-family:'Playfair Display',Georgia,serif;font-size:170px;color:rgba(200,146,58,.1);line-height:1;pointer-events:none}
+.phil-text{font-family:'Playfair Display',Georgia,serif;font-size:18.5px;line-height:1.82;color:rgba(255,255,255,.88);font-style:italic;max-width:640px;position:relative}
+.phil-by{margin-top:18px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c8923a}
+
+/* FOOTER */
+.foot{background:#1a2540;color:rgba(255,255,255,.35);text-align:center;padding:18px;font-size:11px;letter-spacing:.06em}
+
+/* PRINT */
+@media print{
+  .nav,.export-box{display:none!important}
+  body{background:#fff;font-size:11pt}
+  .hero{background:#1a2540!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{padding:10px 0}
+  .tl-body,.res-body,.proj-body,.exp-detail{display:block!important}
+  .phil{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media(max-width:600px){
+  .nav{padding:10px 16px}
+  .nav-links{display:none}
+  .hero{padding:38px 20px 34px}
+  .hero-name{font-size:38px}
+  .wrap{padding:30px 18px 60px}
+  .edu-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-name">Wilshem Pennick</div>
+  <div class="nav-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#experience">Experience</a>
+    <a href="#results">Results</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+  </div>
+  <button class="nav-btn" onclick="window.print()">&#8595; Export PDF</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-bar"></div>
+  <div class="hero-inner">
+    <h1 class="hero-name">Wilshem <span>Pennick</span></h1>
+    <div class="hero-tag">At the Intersection of Space, Institutions &amp; Imagination</div>
+
+    <p class="hero-summary">I began my career in healthcare philanthropy, where exposure to clinical research and innovation sparked a curiosity that has shaped everything since. That curiosity led to a consulting practice at the intersection of technology and institutions &mdash; work that took me through simulation and virtual reality, into prisons and reentry programs, and ultimately back to a lifelong interest in space. I returned to school for a Master&rsquo;s in Space Operations, with focus on public policy, governance, and capital formation.</p>
+
+    <p class="hero-summary" style="margin-top:-10px;">Today I operate simultaneously across public-private strategy, technical project management, startup building, academic research, and patronage of the arts &mdash; working alongside inventors, creatives, and scientists who understand that the next frontier will demand coordination across culture, capital, and institutions.</p>
+
+    <div class="hero-currently">
+      <div class="hero-currently-label">Currently Active Across</div>
+      <div class="current-roles">
+        <div class="role-pill">Clerk &amp; Comptroller &mdash; Town of Marineland</div>
+        <div class="role-pill">Relationship Specialist &mdash; VyStar Credit Union</div>
+        <div class="role-pill">Founder &mdash; It Just Gets Better LLC</div>
+        <div class="role-pill">Managing Member &mdash; Close Collective LLC</div>
+        <div class="role-pill">Head of Strategic Intelligence &mdash; Microtron AI</div>
+        <div class="role-pill">M.S. Space Operations &mdash; ERAU (Expected 2027)</div>
+      </div>
+    </div>
+
+    <div class="hero-pills">
+      <div class="pill"><div class="pill-dot"></div>Jacksonville Beach, FL</div>
+      <div class="pill"><div class="pill-dot"></div>904-456-5915</div>
+      <div class="pill"><div class="pill-dot"></div>wilshem@itjustgetsbetter.org</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- EXPORT BOX -->
+<div class="export-box">
+  <b>&#128196; How to Save as PDF</b>
+  <p><strong>Chrome / Edge:</strong> Click &ldquo;Export PDF&rdquo; &rarr; Destination: &ldquo;Save as PDF&rdquo; &rarr; Margins: Minimum &rarr; Enable &ldquo;Background graphics&rdquo; &rarr; Save.</p>
+  <p><strong>Safari:</strong> File &rarr; Export as PDF &mdash; or &mdash; File &rarr; Print &rarr; PDF dropdown (bottom-left) &rarr; Save as PDF.</p>
+</div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="sec-label">Core Competencies</div>
+  <div class="sec-title">Key Expertise</div>
+  <div class="exp-grid">
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Government Administration</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The management of public institutions, records, and civic processes in compliance with law and in service of community. Encompasses official recordkeeping, fiduciary oversight, regulatory compliance, budget participation, and the systems that allow governments &mdash; especially small ones &mdash; to function with transparency, accountability, and continuity across administrations.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Space &amp; Aerospace Analysis</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The application of systems thinking, cost engineering, and policy analysis to the space domain. Covers mission architecture, satellite constellation design, cost modeling, market entry strategy, and the governance frameworks that shape how space assets are financed, regulated, and operated &mdash; from low Earth orbit to the cislunar economy.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Strategic Consulting</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The practice of helping organizations navigate complexity, make better decisions, and move from intention to execution. Includes operations design, project management, market entry analysis, stakeholder strategy, and the translation of ambiguous problems into clear action plans &mdash; applicable across sectors from startups to public institutions.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Venture &amp; Capital Intelligence</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The work of identifying, evaluating, and supporting early-stage companies at the intersection of technology and capital. Includes competitive intelligence, market sizing, due diligence, pitch development, and investor relations &mdash; the connective tissue between promising ideas and the funding required to bring them to scale.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Digital Transformation</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The process of reimagining how institutions and organizations operate through the adoption of technology &mdash; not as an upgrade, but as a structural shift. Spans records digitization, workflow automation, infrastructure procurement, AI integration, and the cultural change management required to make technology stick in real organizations serving real people.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Workforce Development</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The design and delivery of programs that build human capability and connect people to economic opportunity. Involves curriculum development, employer research, coalition building, and instructional delivery &mdash; with particular emphasis on populations historically excluded from technology and the modern economy, including returning citizens and underserved communities.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Financial Operations</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The day-to-day and strategic management of money flows within organizations &mdash; including budgeting, lending, fundraising, grant management, fiduciary oversight, and financial systems design. Covers both institutional finance (municipal government, nonprofit foundations) and consumer finance (retail banking, member lending), with an emphasis on compliance, accuracy, and mission alignment.</div>
+    </div>
+    <div class="exp-card" onclick="this.classList.toggle('open')">
+      <div class="exp-top"><div class="exp-title">Intelligence &amp; Security</div><div class="exp-plus">+</div></div>
+      <div class="exp-detail">The systematic gathering, analysis, and protection of information to support decision-making and safeguard institutions. Encompasses counterintelligence principles, information security protocols, threat assessment, incident command, and the strategic intelligence functions required by defense-adjacent organizations, critical infrastructure, and sensitive government operations.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-label">Career History</div>
+  <div class="sec-title">Professional Experience</div>
+  <div class="timeline">
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Clerk &amp; Comptroller (Interim)</div><div class="tl-org">Town of Marineland</div></div>
+        <div class="tl-right"><div class="tl-dates">08/2025 &ndash; Present</div><div class="tl-loc">Marineland, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Serve as official record keeper preparing minutes, resolutions, and agendas in compliance with Florida Sunshine Law and Public Records Law</li>
+        <li>Leading the Marineland Public Intelligence + Records Digitization Project (MPI+RDP) to digitize, categorize, and organize historical and active document archives</li>
+        <li>Built a municipal billing tracker with automated hour logging, multi-rate billing logic, and monthly invoice generation for contractors</li>
+        <li>Exercise fiduciary authority on behalf of the Town, including serving as authorized signer on municipal bank accounts</li>
+        <li>Participate in budget planning hearings contributing to fiscal strategy and transparency</li>
+        <li>Maintain official website ensuring timely posting and Florida Sunshine Law compliance</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Head of Strategic Intelligence</div><div class="tl-org">Microtron AI</div></div>
+        <div class="tl-right"><div class="tl-dates">2025 &ndash; Present</div><div class="tl-loc">Remote</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Lead intelligence strategy and competitive analysis for an AI company operating at the intersection of defense technology and advanced systems</li>
+        <li>Develop strategic frameworks positioning the organization across defense, commercial, and emerging technology markets</li>
+        <li>Support investor and stakeholder communications, translating complex technical capabilities into strategic narratives</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Relationship Specialist</div><div class="tl-org">VyStar Credit Union</div></div>
+        <div class="tl-right"><div class="tl-dates">03/2025 &ndash; Present</div><div class="tl-loc">Jacksonville, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Collaborate with underwriters and have funded $500,000+ in member loans across auto, personal, and credit-building products</li>
+        <li>Recognized by VP of Voice of the Member for exceptional service delivery</li>
+        <li>Serve members across teller, in-office, and drive-through channels</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Founder &amp; Principal Consultant</div><div class="tl-org">It Just Gets Better LLC</div></div>
+        <div class="tl-right"><div class="tl-dates">04/2018 &ndash; Present</div><div class="tl-loc">Jacksonville, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body">
+        <ul>
+          <li>Provide operations, project management, and strategic consulting services to clients across technology, healthcare, and emerging sectors</li>
+          <li>Source and actively manage up to five contracts at a time for technology startups, nonprofits, and SMB businesses, ensuring successful project execution and achievement of key objectives</li>
+          <li>Lead and mentor junior researchers and account managers, providing guidance on project execution, research methodologies, and client management</li>
+          <li>Educate elected and appointed officials on technology trends and advocate for policies supporting technological advancement and workforce development in underserved communities</li>
+          <li>Manage operational budgets and develop funding strategies as Acting COO/Managing Member for startup clients</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Managing Member</div><div class="tl-org">Close Collective LLC</div></div>
+        <div class="tl-right"><div class="tl-dates">2024 &ndash; Present</div><div class="tl-loc">Jacksonville, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Co-manage a music and creative company with responsibility for finance, operations, and member distribution strategy</li>
+        <li>Oversee revenue management systems, publishing splits, and sync pipeline for artist projects</li>
+        <li>Structure and manage operating agreements, ownership allocations, and multi-member LLC governance</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Financial &amp; Digital Literacy Instructor</div><div class="tl-org">Operation New Hope</div></div>
+        <div class="tl-right"><div class="tl-dates">01/2024 &ndash; 02/2025</div><div class="tl-loc">Cocoa, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Developed and delivered technology skills curriculum tailored for formerly incarcerated individuals</li>
+        <li>Co-created financial literacy program with a local credit union covering budgeting, credit building, and responsible banking</li>
+        <li>Researched defense and aerospace employers to inform manufacturing and trades career pathways</li>
+        <li>Managed in-person sessions (5&ndash;10) and virtual sessions (up to 40 attendees)</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Director of Mission Advancement</div><div class="tl-org">Promising People Missions</div></div>
+        <div class="tl-right"><div class="tl-dates">01/2023 &ndash; 12/2023</div><div class="tl-loc">Orlando, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Spearheaded revision of 5-year strategic plan aligned with local, state, and federal funding opportunities</li>
+        <li>Built and led a coalition of 25+ nonprofits, educational institutions, and private sector partners for technology training delivery</li>
+        <li>Led RFP submissions valued $100,000+; developed program budgets and secured letters of support</li>
+        <li>Served as on-camera spokesperson at conferences and executive meetings</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Senior Advocate &amp; Executive Asst. to CEO</div><div class="tl-org">Promising People</div></div>
+        <div class="tl-right"><div class="tl-dates">09/2022 &ndash; 01/2023</div><div class="tl-loc">Orlando, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Primary aide during investor meetings nationwide, contributing to a $1.5M seed funding raise</li>
+        <li>Conducted competitive intelligence analysis providing actionable insights for key organizational programs</li>
+        <li>Managed vendor relationships and coordinated procurement for fundraising events</li>
+      </ul></div>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-dot"></div>
+      <div class="tl-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="tl-title">Foundation Development Specialist</div><div class="tl-org">Ascension St. Vincent&rsquo;s Foundation</div></div>
+        <div class="tl-right"><div class="tl-dates">11/2019 &ndash; 11/2021</div><div class="tl-loc">Jacksonville, FL</div><span class="tl-arr">&#9660;</span></div>
+      </div>
+      <div class="tl-body"><ul>
+        <li>Raised $300,000+ for nonprofit healthcare initiatives through donor communications and relationship management</li>
+        <li>Served as primary liaison for 150+ donors, maintaining trust and ensuring continued mission support</li>
+        <li>Managed planning and execution of fundraising events in collaboration with vendors and stakeholders</li>
+      </ul></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACCOMPLISHMENTS -->
+<section id="results">
+  <div class="sec-label">By the Numbers</div>
+  <div class="sec-title">Major Accomplishments</div>
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">$1.5<span>M</span></div>
+        <div class="stat-label">Seed Funding Supported</div>
+        <div class="stat-context">Contributed to closing a $1.5M seed round as primary investor relations aide at Promising People</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">$500<span>K+</span></div>
+        <div class="stat-label">Member Loans Funded</div>
+        <div class="stat-context">Collaborated with underwriters at VyStar Credit Union to fund loans across auto, personal, and credit-building products</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">$300<span>K+</span></div>
+        <div class="stat-label">Healthcare Funds Raised</div>
+        <div class="stat-context">Led donor communications and managed 150+ relationships at Ascension St. Vincent&rsquo;s Foundation</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">150<span>+</span></div>
+        <div class="stat-label">Donors Managed</div>
+        <div class="stat-context">Served as primary relationship liaison for the full donor portfolio at Ascension St. Vincent&rsquo;s Foundation</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">25<span>+</span></div>
+        <div class="stat-label">Partner Coalition Built</div>
+        <div class="stat-context">Assembled nonprofits, universities, and private sector partners for technology workforce training delivery</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-stripe"></div>
+      <div class="stat-body">
+        <div class="stat-number">7<span>+ yrs</span></div>
+        <div class="stat-label">Active Consulting Practice</div>
+        <div class="stat-context">It Just Gets Better LLC &mdash; technology, healthcare, and emerging sectors &mdash; founded during undergraduate studies</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="sec-label">Academic &amp; Applied</div>
+  <div class="sec-title">Research &amp; Analysis</div>
+  <div class="research-list">
+
+    <div class="res-item">
+      <div class="res-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <div class="res-title">38-Satellite Active Debris Removal &mdash; Mission Cost Architecture</div>
+          <div class="res-meta">Embry-Riddle Aeronautical University &bull; Space Operations &bull; 2024&ndash;2025</div>
+          <div class="res-tags"><span class="tag">Cost Estimation</span><span class="tag">Space Systems</span><span class="tag">Trade Studies</span><span class="tag">Mission Planning</span></div>
+        </div>
+        <div class="res-arr">&#8250;</div>
+      </div>
+      <div class="res-body">
+        Developed a comprehensive $293.75M mission cost estimate for a commercial 38-satellite active debris removal constellation. Conducted trade studies across platform alternatives and constructed a phased deployment architecture. Work included five-year financial projections and stakeholder coordination across multiple regulatory bodies.
+        <div class="res-finding"><div class="res-finding-label">Key Output</div>Full mission cost model with phased deployment timeline, platform trade analysis, and $293.75M baseline estimate structured for investor and regulatory review.</div>
+      </div>
+    </div>
+
+    <div class="res-item">
+      <div class="res-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <div class="res-title">Dual-Use Satellite Communications &amp; Sensor Network Design</div>
+          <div class="res-meta">Embry-Riddle Aeronautical University &bull; Space Operations &bull; 2024&ndash;2025</div>
+          <div class="res-tags"><span class="tag">Satellite Comms</span><span class="tag">Dual-Use Systems</span><span class="tag">Financial Projections</span><span class="tag">Regulatory</span></div>
+        </div>
+        <div class="res-arr">&#8250;</div>
+      </div>
+      <div class="res-body">
+        Designed a dual-use satellite communications and sensor network architecture structured for both commercial and government applications. Developed five-year financial projections and coordinated stakeholder analysis across multiple regulatory bodies. Addressed spectrum policy, interoperability, and public-private partnership structures inherent to dual-use orbital systems.
+        <div class="res-finding"><div class="res-finding-label">Key Output</div>Network architecture document with financial model, regulatory stakeholder map, and dual-use operational framework for commercial and government customers.</div>
+      </div>
+    </div>
+
+    <div class="res-item">
+      <div class="res-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <div class="res-title">Italy Space Sector &mdash; Market Entry Analysis</div>
+          <div class="res-meta">Embry-Riddle Aeronautical University &bull; Space Operations &bull; 2024&ndash;2025</div>
+          <div class="res-tags"><span class="tag">Market Entry</span><span class="tag">Space Policy</span><span class="tag">International</span><span class="tag">Risk Analysis</span></div>
+        </div>
+        <div class="res-arr">&#8250;</div>
+      </div>
+      <div class="res-body">
+        Completed a full market entry analysis for Italy&rsquo;s space sector, mapping policy processes, public funding mechanisms, regulatory landscape, and strategic risks for a prospective commercial entrant. Applied Italian language capability to primary policy source analysis. Identified priority entry vectors and assessed competitive dynamics among incumbent players and emerging national programs.
+        <div class="res-finding"><div class="res-finding-label">Key Output</div>Market entry framework covering regulatory pathway, funding landscape, competitive positioning, and strategic risk assessment for the Italian space sector.</div>
+      </div>
+    </div>
+
+    <div class="res-item">
+      <div class="res-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <div class="res-title">Lockheed Martin vs. Blue Origin &mdash; Investment Analysis for Family Office</div>
+          <div class="res-meta">Embry-Riddle Aeronautical University &bull; SPAC 512 &bull; 2025</div>
+          <div class="res-tags"><span class="tag">Investment Analysis</span><span class="tag">Human Spaceflight</span><span class="tag">Market Structure</span><span class="tag">Porter&rsquo;s Five Forces</span></div>
+        </div>
+        <div class="res-arr">&#8250;</div>
+      </div>
+      <div class="res-body">
+        A 20-page comparative investment analysis examining Lockheed Martin (incumbent) versus Blue Origin (insurgent) through the lens of a fictional family office capital allocation decision. Applied Porter&rsquo;s Five Forces, government risk evolution, market structure analysis, and supply chain frameworks. Key positions: the real human spaceflight investment opportunity lies in infrastructure sub-markets rather than flagship programs; Gateway is the key economic inflection point for the cislunar economy; government contracts remain the only reliable value capture mechanism in human spaceflight.
+        <div class="res-finding"><div class="res-finding-label">Key Thesis</div>Blue Origin offers better optionality than Lockheed Martin due to private capital structure and lifecycle positioning within the emerging cislunar infrastructure economy.</div>
+      </div>
+    </div>
+
+    <div class="res-item">
+      <div class="res-head" onclick="this.parentElement.classList.toggle('open')">
+        <div>
+          <div class="res-title">SATCOM Scenario Planning &mdash; Spectrum Regulation &amp; Commercial-Government Shift</div>
+          <div class="res-meta">Embry-Riddle Aeronautical University &bull; SPAC 512 &bull; 2025</div>
+          <div class="res-tags"><span class="tag">Scenario Planning</span><span class="tag">SATCOM</span><span class="tag">Spectrum Policy</span><span class="tag">2x2 Matrix</span></div>
+        </div>
+        <div class="res-arr">&#8250;</div>
+      </div>
+      <div class="res-body">
+        Developed a scenario planning analysis for the satellite communications industry using a 2x2 matrix framework focused on two critical uncertainties: the trajectory of spectrum regulation and the commercial-versus-government customer mix shift. Mapped four distinct future scenarios and their strategic implications for SATCOM operators, government customers, and new entrants competing in contested orbital and spectrum environments.
+        <div class="res-finding"><div class="res-finding-label">Key Output</div>Four-scenario SATCOM strategic landscape with market positioning implications for incumbents and new entrants across regulatory and demand-shift axes.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label">Initiatives &amp; Work</div>
+  <div class="sec-title">Projects &amp; Initiatives</div>
+  <div class="proj-list">
+
+    <div class="proj-item">
+      <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="proj-title">Marineland Public Intelligence + Records Digitization Project (MPI+RDP)</div><div class="proj-sub">Town of Marineland &bull; Active</div><div class="tags"><span class="tag">Gov Tech</span><span class="tag">Records Management</span><span class="tag">Digitization</span></div></div>
+        <div class="proj-arr">&#8250;</div>
+      </div>
+      <div class="proj-body">A comprehensive records modernization initiative for one of Florida&rsquo;s smallest incorporated municipalities. Designing and executing the full project arc: document taxonomy, digitization workflows, Florida Public Records Law compliance, and a contractor billing system with automated multi-rate invoicing. The project creates durable institutional memory and positions Marineland for scalable e-government services.</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="proj-title">Esports Lab Infrastructure + HBCU STEAM Initiative</div><div class="proj-sub">The Cxmmunity Foundation &bull; Completed</div><div class="tags"><span class="tag">EdTech</span><span class="tag">Procurement</span><span class="tag">Fortune 75</span></div></div>
+        <div class="proj-arr">&#8250;</div>
+      </div>
+      <div class="proj-body">Sourced technology vendors and conducted cost analysis for esports lab buildouts at colleges and universities. Led negotiations with a Fortune 75 technology company for STEAM initiatives at HBCUs &mdash; resulting in a 12-month funding and procurement strategy requiring alignment of technology capability with institutional goals at the highest corporate partnership level.</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="proj-title">Technology Workforce Development Curriculum</div><div class="proj-sub">Operation New Hope &bull; Completed</div><div class="tags"><span class="tag">Workforce Dev</span><span class="tag">Reentry</span><span class="tag">EdTech</span></div></div>
+        <div class="proj-arr">&#8250;</div>
+      </div>
+      <div class="proj-body">Designed and delivered a technology skills curriculum for formerly incarcerated individuals re-entering the workforce. Integrated financial literacy modules co-created with a local credit union. Researched defense and aerospace employer requirements to inform manufacturing and trades pathways. Managed in-person (5&ndash;10 participants) and virtual sessions (up to 40 attendees).</div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head" onclick="this.parentElement.classList.toggle('open')">
+        <div><div class="proj-title">T2M MedTech Corridor &mdash; Commercialization Coalition</div><div class="proj-sub">It Just Gets Better LLC &bull; Completed</div><div class="tags"><span class="tag">MedTech</span><span class="tag">Commercialization</span><span class="tag">Coalition</span></div></div>
+        <div class="proj-arr">&#8250;</div>
+      </div>
+      <div class="proj-body">As Entrepreneur in Residence, analyzed medical technologies for commercialization potential and identified pathways from research to market. Assembled a coalition of technology companies and researchers, connected stakeholders to technical experts, and facilitated contract closings between development teams and commercialization partners.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-label">Academic &amp; Certifications</div>
+  <div class="sec-title">Education &amp; Credentials</div>
+  <div class="edu-grid">
+    <div class="edu-card"><div class="edu-deg">M.S. Space Operations</div><div class="edu-school">Embry-Riddle Aeronautical University &ndash; Worldwide</div><div class="edu-yr">Expected 2027</div></div>
+    <div class="edu-card"><div class="edu-deg">B.S. Marketing</div><div class="edu-school">Florida State University</div><div class="edu-yr">2018</div></div>
+  </div>
+  <div class="cert-list">
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Azure AI Fundamentals</div><div class="cert-iss">Microsoft Learning</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Economics of Blockchain and Digital Assets</div><div class="cert-iss">Wharton Executive Education</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Bitcoin and Cryptocurrencies</div><div class="cert-iss">UC Berkeley</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Counterintelligence Awareness</div><div class="cert-iss">DCSA</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Acquisition and Contracting Basics in the NISP</div><div class="cert-iss">DCSA</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Transportation Worker Identification Credential (TWIC)</div><div class="cert-iss">TSA</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Introduction to Incident Command System (ICS)</div><div class="cert-iss">FEMA</div></div>
+    <div class="cert-row"><div class="cert-dot"></div><div class="cert-name">Preparing for Mass Casualty Incidents</div><div class="cert-iss">FEMA</div></div>
+  </div>
+  <div class="lang-row">
+    <div class="lang-lbl">Languages</div>
+    <div class="langs"><span><strong>English</strong> &mdash; Native / Bilingual</span><span><strong>Spanish</strong> &mdash; Professional Working</span><span><strong>Italian</strong> &mdash; Elementary</span></div>
+  </div>
+</section>
+
+<!-- ADVISORY -->
+<section id="advisory">
+  <div class="sec-label">Service &amp; Leadership</div>
+  <div class="sec-title">Advisory &amp; Pro Bono</div>
+  <div class="adv-list">
+    <div class="adv-row"><div class="adv-role">National Advisor</div><div class="adv-org">Blacks in Technology Foundation</div></div>
+    <div class="adv-row"><div class="adv-role">Advisor</div><div class="adv-org">National Broadband and Inclusion Initiative</div></div>
+    <div class="adv-row"><div class="adv-role">Advisor</div><div class="adv-org">Promising People</div></div>
+    <div class="adv-row"><div class="adv-role">Advisor</div><div class="adv-org">The Giving Closet Project</div></div>
+    <div class="adv-row"><div class="adv-role">Alumni Advisory Board</div><div class="adv-org">Pi Kappa Alpha Fraternity &mdash; &Delta;&Lambda; Chapter</div></div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section>
+  <div class="sec-label">Mission</div>
+  <div class="sec-title">Philosophy</div>
+  <div class="phil">
+    <div class="phil-mark">&ldquo;</div>
+    <p class="phil-text">I work at the intersection of institutions and imagination &mdash; where the rigor of government and the audacity of emerging technology meet. Progress requires both imagination and stewardship. The next frontier will demand coordination across culture, capital, and institutions &mdash; and that is exactly where I operate.</p>
+    <div class="phil-by">&mdash; Wilshem Pennick</div>
+  </div>
+</section>
+
+</div>
+
+<div class="foot">wilshem.github.io &nbsp;&bull;&nbsp; wilshem@itjustgetsbetter.org &nbsp;&bull;&nbsp; 904-456-5915</div>
+
+</body>
+</html>
